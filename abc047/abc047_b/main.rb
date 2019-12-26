@@ -10,13 +10,13 @@ input.each do |line|
   x, y, a = line.split.map(&:to_i)
   case a
   when 1
-    min_x = x if x > min_x
+    min_x = [x, min_x].max
   when 2
-    max_x = x if x < max_x
+    max_x = [x, max_x].min
   when 3
-    min_y = y if y > min_y
+    min_y = [y, min_y].max
   when 4
-    max_y = y if y < max_y
+    max_y = [y, max_y].min
   else
     raise
   end
@@ -24,4 +24,5 @@ end
 
 # p [max_x, min_x, max_y, min_y]
 
-puts [0, (max_x - min_x) * (max_y - min_y)].max
+puts [0, (max_x - min_x)].max * [0, (max_y - min_y)].max
+
